@@ -30,7 +30,7 @@ public class Mod9Week2Day3MiniExercise2PasswordLength {
         Integer countChar = 0;
      
          for(int i=0; i<password.length(); i++){
-        if(0<=password.charAt(i) && password.charAt(i)>=9){
+        if(0<=password.charAt(i) && password.charAt(i)<=9){
             countDigits++;
         }
         else if(('a'>=password.charAt(i) && password.charAt(i)<='z') || 
