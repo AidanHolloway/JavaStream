@@ -33,8 +33,8 @@ public class Mod9Week2Day3MiniExercise2PasswordLength {
         if('0'<=password.charAt(i) && password.charAt(i)<='9'){
             countDigits++;
         }
-        else if(('a'>=password.charAt(i) && password.charAt(i)<='z') || 
-                ('A'>=password.charAt(i) && password.charAt(i)<='Z')){
+        else if(('a'<=password.charAt(i) && password.charAt(i)<='z') || 
+                ('A'<=password.charAt(i) && password.charAt(i)<='Z')){
             countChar++;
             }
     }
