@@ -1,21 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mod9week1day3act2;
-
 import java.util.Scanner;
 
-/**
- *
- * @author AidanH
- */
 public class Mod9Week1Day3Act2 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
        
         System.out.println("Enter vaules for a 4 by 5 2d array (20 numbers). Enter the word Skip to have preselected numbers automatically be used.");
@@ -25,7 +11,7 @@ public class Mod9Week1Day3Act2 {
         
          double[][] arr = new double[4][5];
          
-        if(!(option.nextLine().equals("Skip"))){
+        if(!(((option.nextLine()).toLowerCase()).equals("skip"))){
            Scanner keyBoard = new Scanner(System.in);
            
             
