@@ -81,7 +81,7 @@ public class Mod9Week2Day4MiniProgramEx1Sort {
         for(int i=0; i<count-1; i++){
             for(int j=0;j<count-i-1; j++){
            
-            if(stringArr[j].compareTo(stringArr[j+1])>0){
+            if(stringArr[j].compareToIgnoreCase(stringArr[j+1])>0){
                 temp = stringArr[j];
                 stringArr[j]=stringArr[j+1];
                 stringArr[j+1]=temp;
