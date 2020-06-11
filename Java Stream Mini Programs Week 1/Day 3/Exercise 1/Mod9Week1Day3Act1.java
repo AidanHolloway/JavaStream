@@ -1,23 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mod9week1day3act1;
-
 import java.util.Arrays;
 
-/**
- *
- * @author AidanH
- */
 public class Mod9Week1Day3Act1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
         int[] dupeArr = new int[6];
         dupeArr[0] = 10;
         dupeArr[1] = 22;
