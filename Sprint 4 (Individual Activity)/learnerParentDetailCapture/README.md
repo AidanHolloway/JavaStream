@@ -15,6 +15,6 @@ The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More detail
 
 ## Project Overview
 
-This program was created to read in user input and store them in Microsoft Access Database files. The input varies between the data that would need to be stored for parents and for learners. The data stored for parents include their first name, surname, contact number, address and the number of children they currently have enrolled in school.The data stored for leaners is their first name, surname, date of birth, gender and their current school grade.
+This program was created to read in user input and store them in Microsoft Access Database files. The input varies between the data that would need to be stored for parents and for learners. The data stored for parents include their first name, surname, contact number, address and the number of children they currently have enrolled in school. The data stored for leaners is their first name, surname, date of birth, gender and their current school grade.
 
-The start of the program allows the user to choose to input data for either the parent or the learner. After all the necessary data has been entered the program prints out all the currently stored information stored in the database. This also shows the newly entered data at the bottom of the printed output, since it was entered the most recently.
+The start of the program allows the user to choose to input data for either the parent or the learner. After all the necessary data has been entered the program prints out all the currently stored information stored in the database. This also shows the newly entered data at the bottom of the printed output, since it was entered most recently.
