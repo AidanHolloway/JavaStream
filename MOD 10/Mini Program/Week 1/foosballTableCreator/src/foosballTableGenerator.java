@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 
 public class foosballTableGenerator {
     public static void main(String[] args) throws Exception {
-        while (true) {
         String[] transactions = {"Insert Table", "Read Stored Data", "Insert data", "Exit Program"};
 
         int index = JOptionPane.showOptionDialog(null, "What would you like to do with this database?", 
@@ -30,7 +29,7 @@ public class foosballTableGenerator {
 
         }
 
-    }
+    
 }
     static void createTable(){
 
@@ -92,11 +91,11 @@ public class foosballTableGenerator {
         
        System.out.println("Enter the player's age.");
 
-       String age = scan.nextLine();
+       int age = Integer.parseInt(scan.nextLine());
 
        System.out.println("Enter the player's amount of matches played.");
 
-       String matches = scan.nextLine();
+       int matches = Integer.parseInt(scan.nextLine());
 
         String sql = "INSERT INTO Player (" +
         "Name, Age, Matches) VALUES ('"+ name +"','"+ age + "','" + matches + "')";
