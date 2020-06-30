@@ -39,6 +39,7 @@ public class foosballTableGenerator {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foosball","root","root");
             String sql = "CREATE TABLE Player (" +
+                "PlayerId INT AUTO_INCREMENT NOT NULL, Name VARCHAR(100), Age INT, Matches INT, PRIMARY KEY(PlayerId))";
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
             
