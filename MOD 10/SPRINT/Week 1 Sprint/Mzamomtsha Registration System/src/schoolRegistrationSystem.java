@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 public class schoolRegistrationSystem {
     public static void main(String[] args) throws Exception {
        String[] choices = {"Insert Table", "Read Stored Data", "Search for specific records", "Insert data", "Delete Records", "Exit Program"};
+
         while(true){
         int index = JOptionPane.showOptionDialog(null, "What would you like to do with this database?", 
         "Database Choices", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -24,8 +25,7 @@ public class schoolRegistrationSystem {
              createTableParent();    
                  break;
             default:
-            JOptionPane.showMessageDialog(null, "This is a Yes or No question. Please choose next time.");
-                break;
+            continue ;
         }
 
         String [] tableLearn = {"Yes", "No"};
@@ -37,35 +37,38 @@ public class schoolRegistrationSystem {
             case 0:
                 
                 break;
-             case 1:
+                case 1:
              createTableLeaner();  
-                 break;
+                break;
              default:
-             JOptionPane.showMessageDialog(null, "This is a Yes or No question. Please choose next time.");
-             break;
+            continue;
         } 
           
             break;
             case 1 :
             readChoice();
-            
             break;
+
             case 2 : 
                 searchChoice();
             break;
+
             case 3 :
             insertChoice();
-            
-            break;
+            continue;
+
             case 4 :
             deleteChoice();
-            break;
+            continue;
+
             case 5 :
             JOptionPane.showMessageDialog(null, "Program successfully terminated.");
             System.exit(0);
             break;
             default :
-            JOptionPane.showMessageDialog(null, "Please select one of the given options.");
+            
+            JOptionPane.showMessageDialog(null, "Program successfully terminated.");
+            System.exit(0);
 
         }
         
@@ -82,24 +85,37 @@ public class schoolRegistrationSystem {
                   case 0:
                   id = JOptionPane.showInputDialog(null, "Enter the ID of the parent you want to search for:");
 
+                  if (isNull(id) == true) {
+                    return;
+                }
+
                   searchParentID(id);
                       break;
                   case 1:
                   id = JOptionPane.showInputDialog(null, "Enter the ID of the learner you want to search for:");
 
+                  if (isNull(id) == true) {
+                    return;
+                }
+
                   searchLearnerID(id);
                       break;
                   default:
-                  JOptionPane.showMessageDialog(null, "Sorry, please specify either parent or learner next time.");
-                      break;
+                    return;
               }
   }
 
     private static void deleteChoice(){
       String username =  JOptionPane.showInputDialog(null, "Enter your admin Username:");
+      if (isNull(username) == true) {
+        return;
+    }
 
       String password = JOptionPane.showInputDialog(null, "Enter your admin Password:");
 
+    if (isNull(password) == true) {
+        return;
+    }
           if(isAdmin(username, password)){
 
               String deleteChoice[] = {"Parents","Leaners"};
@@ -112,16 +128,23 @@ public class schoolRegistrationSystem {
                   case 0:
                   id = JOptionPane.showInputDialog(null, "Enter the ID of the parent you want to delete:");
 
+                  if (isNull(id) == true) {
+                    return;
+                }
+
                   deleteParent(id);
                       break;
                   case 1:
                   id = JOptionPane.showInputDialog(null, "Enter the ID of the learner you want to delete:");
 
+                  if (isNull(id) == true) {
+                    return;
+                }
+
                   deleteLearner(id);
                       break;
                   default:
-                  JOptionPane.showMessageDialog(null, "Sorry, please specify either parent or learner next time.");
-                      break;
+                   return;
               }
           }
           else {
@@ -279,10 +302,10 @@ private static void searchParentID(String idNum) {
         }  
 }
 
-public static boolean isAdmin(String username, String password) {
+public static boolean isAdmin(String userNAME, String passWORD) {
     boolean answer = false;
 
-     if(password.equals("password") && username.equals("username")){
+     if(passWORD.equals("password") && userNAME.equals("username")){
             answer = true;
         }        
 
@@ -304,17 +327,24 @@ public static void readChoice(){
                 readOutLearner();
                 break;
             default:
-                System.out.println("Sorry, please specify either parent or learner next time.");
-                break;
+                return;
         }
 }
 
     public static void insertChoice(){
 
-        String username =  JOptionPane.showInputDialog(null, "Enter your admin Username:");
+        String username = JOptionPane.showInputDialog(null, "Enter your admin Username:");
+
+        if (isNull(username) == true) {
+            return;
+        }
+        String password = JOptionPane.showInputDialog(null, "Enter your admin Password:");
 
         
-        String password = JOptionPane.showInputDialog(null, "Enter your admin Password:");
+        
+        if (isNull(password) == true) {
+            return;
+        }
 
             if(isAdmin(username, password)){
 
@@ -331,8 +361,7 @@ public static void readChoice(){
                             readInLearner();
                         break;
                     default:
-                    JOptionPane.showMessageDialog(null, "Sorry, please specify either parent or learner next time.");
-                        break;
+                    return;
                 }
             }
             else {
@@ -383,6 +412,15 @@ public static void readChoice(){
             
     }
 
+
+    public static boolean isNull(String var) {
+        if ((var == null) || (var != null && ("".equals(var)) )) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static void readInLearner(){
         Connection conn = null;
         try {
@@ -391,13 +429,33 @@ public static void readChoice(){
 
             String name = JOptionPane.showInputDialog(null, "Enter Student Name");
 
+            if (isNull(name) == true) {
+                return;
+            }
+
             String surname = JOptionPane.showInputDialog(null, "Enter Student Surname");
+
+            if (isNull(surname) == true) {
+                return;
+            }
             
             String dob = JOptionPane.showInputDialog(null, "Enter Student Date of Birth");
 
+            if (isNull(dob) == true) {
+                return;
+            }
+
             String gender = JOptionPane.showInputDialog(null, "Enter Student Gender");
 
+            if (isNull(gender) == true) {
+                return;
+            }
+
             String grade = JOptionPane.showInputDialog(null, "Enter Student Grade");
+
+            if (isNull(grade) == true) {
+                return;
+            }
            
             PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(Names, Surname, DateOfBirth, Gender, Grade) VALUES(?,?,?,?,?)");
             stmt.setString(1, name);
@@ -424,13 +482,33 @@ public static void readChoice(){
 
             String name = JOptionPane.showInputDialog(null, "Enter Parent Name");
 
+            if (isNull(name) == true) {
+                return;
+            }
+
             String surname = JOptionPane.showInputDialog(null, "Enter Parent Surname"); 
+
+            if (isNull(surname) == true) {
+                return;
+            }
 
             String contactNum = JOptionPane.showInputDialog(null, "Enter Parent Contact Number");
 
+            if (isNull(contactNum) == true) {
+                return;
+            }
+
             String address = JOptionPane.showInputDialog(null, "Enter Parent Address");           
 
+            if (isNull(address) == true) {
+                return;
+            }
+
             String numChildren = JOptionPane.showInputDialog(null, "Enter the Number of your Children currently in enrolled in our school");
+
+            if (isNull(numChildren) == true) {
+                return;
+            }
 
             PreparedStatement stmt=conn.prepareStatement("INSERT INTO parentDetails(Names, Surname, ContactNum, Address, NumOfChildren) VALUES(?,?,?,?,?)");
             stmt.setString(1, name);
