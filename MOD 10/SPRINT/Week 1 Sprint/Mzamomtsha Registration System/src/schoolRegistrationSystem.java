@@ -15,11 +15,8 @@ public class schoolRegistrationSystem {
             index = JOptionPane.showOptionDialog(null, "Is there already a database for parents?", 
         "Table Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
          null, tablePar, tablePar[0]);
-            //String answer =  JOptionPane.showInputDialog(null, "Is there already a database for parents?");
-
         
         switch (index){
-            //answer).toLowerCase()) {
             case 0:
                 
                 break;
@@ -39,8 +36,7 @@ public class schoolRegistrationSystem {
             index = JOptionPane.showOptionDialog(null, "Is there already a database for learners?", 
         "Table Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
          null, tableLearn, tableLearn[0]);
-            
-          //  answer = JOptionPane.showInputDialog(null, "Is there already a database for parents?");
+
         switch (index) {
             case 0:
                 
