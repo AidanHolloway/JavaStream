@@ -11,7 +11,7 @@ public class schoolRegistrationSystem {
 
        switch(index){
             case 0 :
-            String[] tablePar = {"Yes", "No", "I'm Not Sure"};
+            String[] tablePar = {"Yes", "No"};
             index = JOptionPane.showOptionDialog(null, "Is there already a database for parents?", 
         "Table Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
          null, tablePar, tablePar[0]);
@@ -23,16 +23,12 @@ public class schoolRegistrationSystem {
              case 1:
              createTableParent();    
                  break;
-            case 2:
-                JOptionPane.showMessageDialog(null, "We will attempt to make one just to be sure.");
-                break;
             default:
-            JOptionPane.showMessageDialog(null, "This is a Yes or No question. We will attempt to make one just to be sure.");
-            createTableParent();
+            JOptionPane.showMessageDialog(null, "This is a Yes or No question. Please choose next time.");
                 break;
         }
 
-        String [] tableLearn = {"Yes", "No", "I'm Not Sure"};
+        String [] tableLearn = {"Yes", "No"};
             index = JOptionPane.showOptionDialog(null, "Is there already a database for learners?", 
         "Table Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
          null, tableLearn, tableLearn[0]);
@@ -44,13 +40,9 @@ public class schoolRegistrationSystem {
              case 1:
              createTableLeaner();  
                  break;
-            case 2:
-                 JOptionPane.showMessageDialog(null, "We will attempt to make one just to be sure.");
-                 break;
              default:
-             JOptionPane.showMessageDialog(null, "This is a Yes or No question. We will attempt to make one just to be sure.");
-             createTableLeaner();
-                break;
+             JOptionPane.showMessageDialog(null, "This is a Yes or No question. Please choose next time.");
+             break;
         } 
           
             break;
