@@ -11,37 +11,49 @@ public class schoolRegistrationSystem {
 
        switch(index){
             case 0 :
-            String answer =  JOptionPane.showInputDialog(null, "Is there already a database for parents?");
+            String[] tablePar = {"Yes", "No", "I'm Not Sure"};
+            index = JOptionPane.showOptionDialog(null, "Is there already a database for parents?", 
+        "Table Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+         null, tablePar, tablePar[0]);
+            //String answer =  JOptionPane.showInputDialog(null, "Is there already a database for parents?");
 
         
-        switch ((answer).toLowerCase()) {
-            case "yes":
+        switch (index){
+            //answer).toLowerCase()) {
+            case 0:
                 
                 break;
-             case "no":
-                createTableLeaner();    
+             case 1:
+             createTableParent();    
                  break;
-
+            case 2:
+                JOptionPane.showMessageDialog(null, "We will attempt to make one just to be sure.");
+                break;
             default:
             JOptionPane.showMessageDialog(null, "This is a Yes or No question. We will attempt to make one just to be sure.");
-                createTableLeaner();
+            createTableParent();
                 break;
         }
 
-      
+        String [] tableLearn = {"Yes", "No", "I'm Not Sure"};
+            index = JOptionPane.showOptionDialog(null, "Is there already a database for learners?", 
+        "Table Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+         null, tableLearn, tableLearn[0]);
             
-            answer = JOptionPane.showInputDialog(null, "Is there already a database for parents?");
-        switch ((answer).toLowerCase()) {
-            case "yes":
+          //  answer = JOptionPane.showInputDialog(null, "Is there already a database for parents?");
+        switch (index) {
+            case 0:
                 
                 break;
-             case "no":
-                createTableParent();  
+             case 1:
+             createTableLeaner();  
                  break;
-
-            default:
-                JOptionPane.showMessageDialog(null, "This is a Yes or No question. We will attempt to make one just to be sure.");
-                createTableLeaner();
+            case 2:
+                 JOptionPane.showMessageDialog(null, "We will attempt to make one just to be sure.");
+                 break;
+             default:
+             JOptionPane.showMessageDialog(null, "This is a Yes or No question. We will attempt to make one just to be sure.");
+             createTableLeaner();
                 break;
         } 
           
@@ -367,7 +379,7 @@ public static void readChoice(){
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
 
-            String sql = "CREATE TABLE parentDetails (" +
+            String sql = "CREATE TABLE IF NOT EXISTS parentDetails (" +
                 "ID INT AUTO_INCREMENT NOT NULL, Names VARCHAR(100), Surname VARCHAR(100), ContactNum VARCHAR(30), Address VARCHAR(100), "
                 +"NumOfChildren INT, PRIMARY KEY(ID))";
 
