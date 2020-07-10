@@ -21,7 +21,7 @@ public class LogInForm extends javax.swing.JFrame {
         initComponents();
     }
         public static String accessLevel = "";
-        public static int parentId = 2;
+        public static int parentId = 0;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

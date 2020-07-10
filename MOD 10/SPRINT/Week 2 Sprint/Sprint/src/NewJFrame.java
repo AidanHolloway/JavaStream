@@ -886,23 +886,36 @@ public class NewJFrame extends javax.swing.JFrame {
         }
 
 
-            String sql = "SELECT COUNT(1) FROM " + tableName + " WHERE Username = '" + userNAME  + "' AND Password = '" + passWORD + "'";
+            String sql = "SELECT COUNT(1), ID FROM " + tableName + " WHERE Username = '" + userNAME  + "' AND Password = '" + passWORD + "'";
 
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(sql);
+     //   conn.close();
 
             if(result.next()){
                 int res = result.getInt(1);
                 if(res == 1){
+               //     Class.forName("com.mysql.cj.jdbc.Driver");
+                  //  conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
+
+                //    sql = "SELECT ID FROM " + tableName + " WHERE Username = '" + userNAME  + "' AND Password = '" + passWORD + "'";
+           //  Statement stmt2 = conn.createStatement();
+         //   ResultSet result2 = stmt2.executeQuery(sql);
+             
+          //  conn.close();
                     if(tableName.equals("parentdetails")){
+                        LogInForm.parentId = result.getInt("ID");
+                        conn.close();
                         return "Parent";
                     }
                     else if (tableName.equals("teacherdetails")){
+                        conn.close();
                         return "Teacher";
                     }
                 }
 
             else {
+                JOptionPane.showMessageDialog(null, "Invalid username", "Access Denied", 0);
                 return "Denied"; 
              }
          }
@@ -912,7 +925,8 @@ public class NewJFrame extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(null, "An error has occurred.");
          ex.printStackTrace();
      }  
-     return "Denied";
+     JOptionPane.showMessageDialog(null, "Invalid username", "Access Denied", 0);
+                return "Denied";
         }
 
 
