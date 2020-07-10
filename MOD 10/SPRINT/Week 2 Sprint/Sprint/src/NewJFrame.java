@@ -321,6 +321,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+
+        createTable(currTable);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnLearnerTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLearnerTblActionPerformed
@@ -960,4 +962,63 @@ public class NewJFrame extends javax.swing.JFrame {
             }
     
         }
+
+
+        public static void createTable (String tableType) {
+
+            Connection conn = null;
+    
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
+    
+                String sql = "";
+                        //ID, Names, Surname, DateOfBirth, Gender, Grade, ParentID
+                switch(tableType) {
+                    case "Learner":
+                        sql = "CREATE TABLE IF NOT EXISTS learnerDetails(" +
+                        "ID INT AUTO_INCREMENT NOT NULL, ParentID INT, Names VARCHAR(45), Surname VARCHAR(100), DateOfBirth VARCHAR(45), Gender VARCHAR(45), Grade INT, PRIMARY KEY(ID), FOREIGN KEY(ParentID) REFERENCES parentDetails(ID))";
+                        break;
+                    case "Parent":
+                    //ID, Names, Surname, ContactNum, Address, NumOfChildren, Password, Username
+                        sql = "CREATE TABLE IF NOT EXISTS parentDetails(" +
+                        "ID INT AUTO_INCREMENT NOT NULL, Username VARCHAR(100) NOT NULL, Password VARCHAR(45) NOT NULL, Names VARCHAR(45), Surname VARCHAR(45), Address VARCHAR(45), ContactNum VARCHAR(45), NumOfChildren INT, PRIMARY KEY(ID), UNIQUE(Username))";
+                        break;
+                    case "Teacher":
+                    //ID, Name, Surname, ContactNo, Username, Password
+                        sql = "CREATE TABLE IF NOT EXISTS teacherDetails(" +
+                        "ID INT AUTO_INCREMENT NOT NULL, Username VARCHAR(45) NOT NULL, Password VARCHAR(45) NOT NULL, Name VARCHAR(45), Surname VARCHAR(45), Address VARCHAR(45), ContactNo VARCHAR(45), PRIMARY KEY(ID), UNIQUE(Username))";
+                        break;
+                }
+    
+                Statement stmt = conn.createStatement();
+            
+                stmt.executeUpdate(sql);
+    
+                conn.close();  
+            } catch (SQLException | ClassNotFoundException ex) {
+                System.out.println("An error has occurred.");
+                ex.printStackTrace();
+            }
+    
+        }
+
+        /*public static void createTable(String tableType) {
+            
+            String tableName = "";
+        switch (tableType) {
+            case "Learner":
+                tableName = "learnerDetails";
+                break;
+        case "Parent":
+                tableName = "parentDetails";
+                break;
+        case "Teacher":
+                tableName = "teacherDetails";
+                break;
+        
+            default:
+                break;
+        } 
+    }*/
 }
