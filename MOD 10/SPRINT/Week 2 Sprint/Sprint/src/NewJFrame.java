@@ -284,7 +284,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        searchID(1, currTable);
+        int idSearch = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the ID of the record you want to print the details out from:"));
+        searchID(idSearch, currTable);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -312,8 +313,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        
-        deleteRecord(0, currTable);
+        int idSearch = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the ID of the record you want to delete:"));
+        deleteRecord(idSearch, currTable);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -340,6 +341,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btnTeacherTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherTblActionPerformed
         // TODO add your handling code here:
+        currTable = "Teacher";
+        printAll(currTable);
     }//GEN-LAST:event_btnTeacherTblActionPerformed
 
     /**
@@ -485,7 +488,20 @@ public class NewJFrame extends javax.swing.JFrame {
            
                         break;
                         case "Teacher":
-                                tableName = "teacherDetails";
+                        model = new DefaultTableModel(new String[]{"ID", "Parent Name", "Surname",
+                        "Contact Number"}, 0);
+                       
+                        while(result2.next()){
+                            idNo = result2.getString("ID");
+                            name = result2.getString("Name");
+                            surname = result2.getString("Surname");
+                            String contacts = result2.getString("ContactNo");
+                         //   String username = result2.getString("Username");
+                        //    String password = result2.getString("Password");
+                            model.addRow(new Object[]{idNo, name, surname, contacts});//, address, numChildren});
+                        }
+                    
+                        jTable2.setModel(model);
                                 break;
                         
                             default:
@@ -669,9 +685,15 @@ public class NewJFrame extends javax.swing.JFrame {
     
                 Statement stmt = conn.createStatement();
                 ResultSet result = stmt.executeQuery(sql);
-    
+
+                String idNo = "";
+                String name = "";
+                String surname = "";
+                String dateOBirth = "";
+                String gender = "";
+                String grade = "";
                 
-    
+                DefaultTableModel model = new DefaultTableModel(new String[]{"Learner ID", "Parent ID", "Name", "Surname", "Date of Birth", "Gender", "Grade"}, 0);
                 if(result.next()){
                     int res = result.getInt(1);
                     if(res == 1){
@@ -680,17 +702,33 @@ public class NewJFrame extends javax.swing.JFrame {
                         ResultSet result2 = stmt.executeQuery(sql);
                         switch (tableType) {
                             case "Learner":
-                                tableName = "learnerDetails";
+                            model = new DefaultTableModel(new String[]{"ID", "Learner Name", "Surname",
+                            "Date of Birth", "Gender", "Grade"}, 0);
+                            
+                            
+                            
+
+                            while(result2.next()){
+                                idNo = result2.getString("ID");
+                                name = result2.getString("Names");
+                                surname = result2.getString("Surname");
+                                dateOBirth = result2.getString("DateOfBirth");
+                                gender = result2.getString("Gender");
+                                grade = result2.getString("Grade");
+                                model.addRow(new Object[]{idNo, name, surname, dateOBirth, gender, grade});
+                            }
+                        
+                            jTable2.setModel(model);
                                 break;
                         case "Parent":
 
-                        DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Parent Name", "Surname",
+                        model = new DefaultTableModel(new String[]{"ID", "Parent Name", "Surname",
                         "Contact Number", "Address", "Number Of Children"}, 0);
 
                         while(result2.next()){
-                            String idNo = result2.getString("ID");
-                            String name = result2.getString("Names");
-                            String surname = result2.getString("Surname");
+                             idNo = result2.getString("ID");
+                             name = result2.getString("Names");
+                             surname = result2.getString("Surname");
                             String contacts = result2.getString("ContactNum");
                             String address = result2.getString("Address");
                             String numChildren = result2.getString("NumOfChildren");
@@ -737,13 +775,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
     ////////////READ IN LEARNER
 
-    public static void readInLearner(String name, String surname, String dob, String gender, String grade, String parentID){
+    public static void readInLearner(String id, String name, String surname, String dob, String gender, String grade, String parentID){
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
 
            // String name = JOptionPane.showInputDialog(null, "Enter Student Name");
+
+           if (isNull(id) == true) {
+            return;
+        }
 
             if (isNull(name) == true) {
                 return;
@@ -777,7 +819,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 return;
             }
 
-            PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(Names, Surname, DateOfBirth, Gender, Grade, ParentID) VALUES(?,?,?,?,?)");
+            PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(Names, Surname, DateOfBirth, Gender, Grade, ParentID) VALUES(?,?,?,?,?,?)");
             stmt.setString(1, name);
             stmt.setString(2, surname);
             stmt.setString(3, dob);
@@ -812,6 +854,8 @@ public class NewJFrame extends javax.swing.JFrame {
 */
 
 
+
+
         public static String logInSearch(String userNAME, String passWORD, String searchTable){
 
             if(userNAME.equals("admin") && passWORD.equals("admin")){
@@ -839,7 +883,7 @@ public class NewJFrame extends javax.swing.JFrame {
             default:
             return "Denied";
                 //break;
-        } 
+        }
 
 
             String sql = "SELECT COUNT(1) FROM " + tableName + " WHERE Username = '" + userNAME  + "' AND Password = '" + passWORD + "'";
@@ -870,5 +914,145 @@ public class NewJFrame extends javax.swing.JFrame {
      }  
      return "Denied";
         }
-}
 
+
+
+        public static void readInParent(String id, String name, String surname, String contactNum, String address, String numChildren, 
+         String password, String username){
+            Connection conn = null;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
+    
+                //String name = JOptionPane.showInputDialog(null, "Enter Parent Name");
+    
+                if (isNull(id) == true) {
+                    return;
+                }
+
+                if (isNull(name) == true) {
+                    return;
+                }
+    
+               // String surname = JOptionPane.showInputDialog(null, "Enter Parent Surname"); 
+    
+                if (isNull(surname) == true) {
+                    return;
+                }
+    
+               // String contactNum = JOptionPane.showInputDialog(null, "Enter Parent Contact Number");
+    
+                if (isNull(contactNum) == true) {
+                    return;
+                }
+    
+              //  String address = JOptionPane.showInputDialog(null, "Enter Parent Address");           
+    
+                if (isNull(address) == true) {
+                    return;
+                }
+    
+                //String numChildren = JOptionPane.showInputDialog(null, "Enter the Number of your Children currently in enrolled in our school");
+    
+                if (isNull(numChildren) == true) {
+                    return;
+                }
+                
+                if (isNull(password) == true) {
+                    return;
+                }
+
+                if (isNull(username) == true) {
+                    return;
+                }
+
+                PreparedStatement stmt=conn.prepareStatement("INSERT INTO parentDetails(ID, Names, Surname, ContactNum, Address, NumOfChildren, Password, Username) VALUES(?,?,?,?,?,?,?,?)");
+                stmt.setString(1, id);
+                stmt.setString(2, name);
+                stmt.setString(3, surname);
+                stmt.setString(4, contactNum);
+                stmt.setString(5, address);
+                stmt.setString(6, numChildren);
+                stmt.setString(7, password);
+                stmt.setString(8, username);
+
+
+                int i=stmt.executeUpdate();
+                JOptionPane.showMessageDialog(null, i + " records inserted");
+                conn.close();
+                 
+            } catch (SQLException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "An error has occurred");
+                ex.printStackTrace();
+            }
+    
+        }
+
+        public static void readInTeacher(String id, String name, String surname, String contactNum, String password, String username){
+            Connection conn = null;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
+    
+                //String name = JOptionPane.showInputDialog(null, "Enter Parent Name");
+    
+                if (isNull(id) == true) {
+                    return;
+                }
+
+                if (isNull(name) == true) {
+                    return;
+                }
+    
+               // String surname = JOptionPane.showInputDialog(null, "Enter Parent Surname"); 
+    
+                if (isNull(surname) == true) {
+                    return;
+                }
+    
+               // String contactNum = JOptionPane.showInputDialog(null, "Enter Parent Contact Number");
+    
+                if (isNull(contactNum) == true) {
+                    return;
+                }
+    
+              //  String address = JOptionPane.showInputDialog(null, "Enter Parent Address");           
+    
+             //   if (isNull(address) == true) {
+             //       return;
+             //   }
+    
+                //String numChildren = JOptionPane.showInputDialog(null, "Enter the Number of your Children currently in enrolled in our school");
+    
+             //   if (isNull(numChildren) == true) {
+            //        return;
+             //   }
+                
+                if (isNull(password) == true) {
+                    return;
+                }
+
+                if (isNull(username) == true) {
+                    return;
+                }
+
+                PreparedStatement stmt=conn.prepareStatement("INSERT INTO teacherDetails(ID, Name, Surname, ContactNo, Username, Password) VALUES(?,?,?,?,?,?)");
+                stmt.setString(1, id);
+                stmt.setString(2, name);
+                stmt.setString(3, surname);
+                stmt.setString(4, contactNum);
+                stmt.setString(5, password);
+                stmt.setString(6, username);
+
+
+                int i=stmt.executeUpdate();
+                JOptionPane.showMessageDialog(null, i + " records inserted");
+                conn.close();
+                 
+            } catch (SQLException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "An error has occurred");
+                ex.printStackTrace();
+            }
+    
+        }
+}

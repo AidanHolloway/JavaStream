@@ -46,7 +46,7 @@ public class InputFrame extends javax.swing.JFrame {
         lblGender = new javax.swing.JLabel();
         lblGrade = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnLearnerUpdate.setText("Update");
         btnLearnerUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +199,8 @@ public class InputFrame extends javax.swing.JFrame {
 
     private void btnLearnerInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLearnerInsertActionPerformed
         // TODO add your handling code here:
+        NewJFrame.readInLearner(tfLearnerID.getText(), tfLearnerName.getText(), tfLearnerSurname.getText(), tfLearnerDOB.getText(), tfLearnerGender.getText(), 
+        tfLearnerGrade.getText(), tfLearnerParentID.getText());
     }//GEN-LAST:event_btnLearnerInsertActionPerformed
 
     /**

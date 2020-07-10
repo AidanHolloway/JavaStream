@@ -191,6 +191,8 @@ public class parentInput extends javax.swing.JFrame {
 
     private void btnParentInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentInsertActionPerformed
         // TODO add your handling code here:
+        NewJFrame.readInParent(tfParentID.getText(), tfName.getText(), tfSurname.getText(), tfContactNo.getText(), tfAddress.getText(),
+         tfNumChildren.getText(), tfPassword.getText(), tfUsername.getText());
     }//GEN-LAST:event_btnParentInsertActionPerformed
 
     /**

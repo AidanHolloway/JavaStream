@@ -162,6 +162,8 @@ public class teacherInput extends javax.swing.JFrame {
 
     private void btnTeacherInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherInsertActionPerformed
         // TODO add your handling code here:
+        NewJFrame.readInTeacher(tfTeacherID.getText(), tfName.getText(), tfSurname.getText(), tfContactNo.getText(), tfPassword.getText(), 
+        tfUsername.getText());;
     }//GEN-LAST:event_btnTeacherInsertActionPerformed
 
     /**
