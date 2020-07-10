@@ -1,5 +1,7 @@
 package src;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,8 +20,8 @@ public class LogInForm extends javax.swing.JFrame {
     public LogInForm() {
         initComponents();
     }
-        public static String accessLevel = "Parent";
-        public static int parentId = 0;
+        public static String accessLevel = "";
+        public static int parentId = 2;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +39,7 @@ public class LogInForm extends javax.swing.JFrame {
         lblSurname = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnLogIn.setText("Log In");
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -46,16 +48,16 @@ public class LogInForm extends javax.swing.JFrame {
             }
         });
 
-        cmbLogIn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbLogIn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Account Type", "Parent", "Teacher", "Admin" }));
         cmbLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLogInActionPerformed(evt);
             }
         });
 
-        lblSurname.setText("Surname");
+        lblSurname.setText("Password");
 
-        lblName.setText("Name");
+        lblName.setText("Username");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,9 +117,15 @@ public class LogInForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          //   System.out.println(NewJFrame.isAdmin("a", "b"));
-        
-       NewJFrame loggedIn = new NewJFrame();
+       accessLevel = 
+       NewJFrame.logInSearch(tfName.getText(), tfSurname.getText(), cmbLogIn.getItemAt(cmbLogIn.getSelectedIndex())); 
+
+       if(!accessLevel.equals("Denied")){
+           NewJFrame loggedIn = new NewJFrame();
        loggedIn.setVisible(true);
+       }
+
+       //JOptionPane.showMessageDialog(null, "", title, messageType);
        
        
         

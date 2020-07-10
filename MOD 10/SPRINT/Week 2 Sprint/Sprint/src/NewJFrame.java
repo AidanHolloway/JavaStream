@@ -122,7 +122,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGap(0, 427, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -292,11 +292,20 @@ public class NewJFrame extends javax.swing.JFrame {
        currButton = "Insert";
         switch (currTable) {
            case "Learner":
-               LearnerInput learnerInputForm = new LearnerInput();
+               InputFrame learnerInputForm = new InputFrame();
                learnerInputForm.setVisible(true);
                     
                break;
-       
+               case "Parent":
+               parentInput parentform = new parentInput();
+               parentform.setVisible(true);
+                    
+               break;
+               case "Teacher":
+               teacherInput teacherform = new teacherInput();
+               teacherform.setVisible(true);
+                    
+               break;
            default:
                break;
        }
@@ -315,7 +324,7 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
        currTable = "Learner"; 
        if(LogInForm.accessLevel.equals("Parent")){
-
+        parentPrint(LogInForm.parentId);
        }
        else{
         printAll(currTable);
@@ -532,19 +541,20 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private static void parentPrint(int parentId){
         Connection conn = null;
-        String databaseName = "testschool";
+      //  String databaseName = "testschool";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + databaseName,"root","root");
-            String sql = "SELECT parent_name, learner_id, learner_name " + 
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
+           /* String sql = "SELECT parent_name, learner_id, learner_name " + 
             "FROM testschool.parent_tbl " +
-            "INNER JOIN learner_tbl ON parent_tbl.parent_id = learner_tbl.parent_id";
-
+            "INNER JOIN learner_tbl ON parent_tbl.parent_id = learner_tbl.parent_id";*/
+            String sql = "SELECT ID, ParentID, Names, Surname, DateOfBirth, Gender, Grade FROM learnerDetails " + 
+                "WHERE(ParentID = " + parentId +")";
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(sql);
 
 
-            DefaultTableModel model = new DefaultTableModel(new String[]{"Learner ID", "Parent Name", "LearnerId", "Learner ID", "Parent Name", "LearnerId"}, 0);
+          /*  DefaultTableModel model = new DefaultTableModel(new String[]{"Learner ID", "Parent Name", "LearnerId", "Learner ID", "Parent Name", "LearnerId"}, 0);
           //  ID, Names, Surname, DateOfBirth, Gender, Grade, ParentID
             while(result.next())
             {
@@ -554,8 +564,23 @@ public class NewJFrame extends javax.swing.JFrame {
                 String g = String.valueOf(result.getInt("learner_id"));
                 model.addRow(new Object[]{d, e, g});
             }
-             
-          
+            */ 
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Learner ID", "Parent ID", "Name", "Surname", "Date of Birth", "Gender", "Grade"}, 0);
+            
+                
+               // ID, Names, Surname, DateOfBirth, Gender, Grade, ParentID
+               // ID, Names, Surname, ContactNum, Address, NumOfChildren
+            while(result.next()) {
+                String learnerID = String.valueOf(result.getInt("ID"));
+                String parentID = String.valueOf(result.getInt("ParentID"));
+                String name = result.getString("Names");
+                String surname = result.getString("Surname");
+                String birthdate = result.getString("DateOfBirth");
+                String gender = result.getString("Gender");
+                String grade = String.valueOf(result.getInt("Grade"));
+                model.addRow(new Object[]{learnerID, parentID, name, surname, birthdate, gender, grade});
+            }
+
            jTable2.setModel(model);
            
         } catch (Exception e) {
@@ -712,48 +737,53 @@ public class NewJFrame extends javax.swing.JFrame {
 
     ////////////READ IN LEARNER
 
-    public static void readInLearner(){
+    public static void readInLearner(String name, String surname, String dob, String gender, String grade, String parentID){
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
 
-            String name = JOptionPane.showInputDialog(null, "Enter Student Name");
+           // String name = JOptionPane.showInputDialog(null, "Enter Student Name");
 
             if (isNull(name) == true) {
                 return;
             }
 
-            String surname = JOptionPane.showInputDialog(null, "Enter Student Surname");
+          //  String surname = JOptionPane.showInputDialog(null, "Enter Student Surname");
 
             if (isNull(surname) == true) {
                 return;
             }
             
-            String dob = JOptionPane.showInputDialog(null, "Enter Student Date of Birth");
+          //  String dob = JOptionPane.showInputDialog(null, "Enter Student Date of Birth");
 
             if (isNull(dob) == true) {
                 return;
             }
 
-            String gender = JOptionPane.showInputDialog(null, "Enter Student Gender");
+         //   String gender = JOptionPane.showInputDialog(null, "Enter Student Gender");
 
             if (isNull(gender) == true) {
                 return;
             }
 
-            String grade = JOptionPane.showInputDialog(null, "Enter Student Grade");
+         //   String grade = JOptionPane.showInputDialog(null, "Enter Student Grade");
 
             if (isNull(grade) == true) {
                 return;
             }
            
-            PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(Names, Surname, DateOfBirth, Gender, Grade) VALUES(?,?,?,?,?)");
+            if(isNull(parentID) == true){
+                return;
+            }
+
+            PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(Names, Surname, DateOfBirth, Gender, Grade, ParentID) VALUES(?,?,?,?,?)");
             stmt.setString(1, name);
             stmt.setString(2, surname);
             stmt.setString(3, dob);
             stmt.setString(4, gender);
             stmt.setString(5, grade);
+            stmt.setString(6, parentID);
             
             int i=stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, i + " records inserted");
@@ -767,7 +797,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     ////////////LOGIN FORM
-    public static String isAdmin(String userNAME, String passWORD) {
+    /*public static String isAdmin(String userNAME, String passWORD) {
         String answer = "";
     
          if(passWORD.equals("password") && userNAME.equals("username")){
@@ -778,6 +808,67 @@ public class NewJFrame extends javax.swing.JFrame {
             }
     
          return answer;
+        }
+*/
+
+
+        public static String logInSearch(String userNAME, String passWORD, String searchTable){
+
+            if(userNAME.equals("admin") && passWORD.equals("admin")){
+                return "Admin";
+            }
+
+            Connection conn = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
+
+            String tableName = "";
+        switch (searchTable) {
+            
+        case "Parent":
+                tableName = "parentdetails";
+                break;
+        case "Teacher":
+                tableName = "teacherdetails";
+                break;
+        case "Admin":
+                JOptionPane.showMessageDialog(null, "Invalid username", "Access Denied", 0);
+                return "Denied";
+          //  break;
+            default:
+            return "Denied";
+                //break;
+        } 
+
+
+            String sql = "SELECT COUNT(1) FROM " + tableName + " WHERE Username = '" + userNAME  + "' AND Password = '" + passWORD + "'";
+
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(sql);
+
+            if(result.next()){
+                int res = result.getInt(1);
+                if(res == 1){
+                    if(tableName.equals("parentdetails")){
+                        return "Parent";
+                    }
+                    else if (tableName.equals("teacherdetails")){
+                        return "Teacher";
+                    }
+                }
+
+            else {
+                return "Denied"; 
+             }
+         }
+             conn.close();
+        }
+     catch (SQLException | ClassNotFoundException ex) {
+         JOptionPane.showMessageDialog(null, "An error has occurred.");
+         ex.printStackTrace();
+     }  
+     return "Denied";
         }
 }
 
