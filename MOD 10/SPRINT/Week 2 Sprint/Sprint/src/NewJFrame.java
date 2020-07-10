@@ -158,7 +158,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        btnCreate.setText("Update");
+        btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
@@ -260,6 +260,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
+        
             switch (LogInForm.accessLevel) {
                 case "Parent":
                 btnCreate.setVisible(false); 
@@ -272,7 +273,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 case "Teacher":
                 btnCreate.setVisible(false); 
                 btnDelete.setVisible(false); 
-                btnInsert.setVisible(false); 
+                btnInsert.setVisible(false);
+                btnTeacherTbl.setVisible(false);  
                     break;
                 case "Admin":
                     
@@ -330,7 +332,7 @@ public class NewJFrame extends javax.swing.JFrame {
        else{
         printAll(currTable);
     }
-        System.out.println(LogInForm.accessLevel);
+        //System.out.println(LogInForm.accessLevel);
     }//GEN-LAST:event_btnLearnerTblActionPerformed
 
     private void btnParentTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentTblActionPerformed
@@ -521,71 +523,23 @@ public class NewJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "An error has occurred.");
                 ex.printStackTrace();
             }  
-        /*
-        Connection conn = null;
-        String databaseName = "testschool";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + databaseName,"root","root");
-            String sql = "SELECT parent_name, learner_id, learner_name " + 
-            "FROM testschool.parent_tbl " +
-            "INNER JOIN learner_tbl ON parent_tbl.parent_id = learner_tbl.parent_id";
-
-            Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(sql);
-
-
-            DefaultTableModel model = new DefaultTableModel(new String[]{"Learner Name", "Parent Name", "LearnerId"}, 0);
-            
-            while(result.next())
-            {
-                String d = result.getString("parent_name");
-                String e = result.getString("learner_name");
-                //String f = result.getString("parent_id");
-                String g = String.valueOf(result.getInt("learner_id"));
-                model.addRow(new Object[]{d, e, g});
-            }
-             
-          
-           jTable2.setModel(model);
-           
-        } catch (Exception e) {
-            //TODO: handle exception
-            e.printStackTrace();
         }
-    */}
 
     private static void parentPrint(int parentId){
         Connection conn = null;
-      //  String databaseName = "testschool";
+      
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
-           /* String sql = "SELECT parent_name, learner_id, learner_name " + 
-            "FROM testschool.parent_tbl " +
-            "INNER JOIN learner_tbl ON parent_tbl.parent_id = learner_tbl.parent_id";*/
+          
             String sql = "SELECT ID, ParentID, Names, Surname, DateOfBirth, Gender, Grade FROM learnerDetails " + 
                 "WHERE(ParentID = " + parentId +")";
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(sql);
 
-
-          /*  DefaultTableModel model = new DefaultTableModel(new String[]{"Learner ID", "Parent Name", "LearnerId", "Learner ID", "Parent Name", "LearnerId"}, 0);
-          //  ID, Names, Surname, DateOfBirth, Gender, Grade, ParentID
-            while(result.next())
-            {
-                String d = result.getString("parent_name");
-                String e = result.getString("learner_name");
-                //String f = result.getString("parent_id");
-                String g = String.valueOf(result.getInt("learner_id"));
-                model.addRow(new Object[]{d, e, g});
-            }
-            */ 
             DefaultTableModel model = new DefaultTableModel(new String[]{"Learner ID", "Parent ID", "Name", "Surname", "Date of Birth", "Gender", "Grade"}, 0);
             
-                
-               // ID, Names, Surname, DateOfBirth, Gender, Grade, ParentID
-               // ID, Names, Surname, ContactNum, Address, NumOfChildren
+
             while(result.next()) {
                 String learnerID = String.valueOf(result.getInt("ID"));
                 String parentID = String.valueOf(result.getInt("ParentID"));
@@ -600,7 +554,7 @@ public class NewJFrame extends javax.swing.JFrame {
            jTable2.setModel(model);
            
         } catch (Exception e) {
-            //TODO: handle exception
+            
             e.printStackTrace();
         }
     }
@@ -781,8 +735,6 @@ public class NewJFrame extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
 
-           // String name = JOptionPane.showInputDialog(null, "Enter Student Name");
-
            if (isNull(id) == true) {
             return;
         }
@@ -791,25 +743,17 @@ public class NewJFrame extends javax.swing.JFrame {
                 return;
             }
 
-          //  String surname = JOptionPane.showInputDialog(null, "Enter Student Surname");
-
             if (isNull(surname) == true) {
                 return;
             }
-            
-          //  String dob = JOptionPane.showInputDialog(null, "Enter Student Date of Birth");
 
             if (isNull(dob) == true) {
                 return;
             }
 
-         //   String gender = JOptionPane.showInputDialog(null, "Enter Student Gender");
-
             if (isNull(gender) == true) {
                 return;
             }
-
-         //   String grade = JOptionPane.showInputDialog(null, "Enter Student Grade");
 
             if (isNull(grade) == true) {
                 return;
@@ -839,22 +783,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     ////////////LOGIN FORM
-    /*public static String isAdmin(String userNAME, String passWORD) {
-        String answer = "";
-    
-         if(passWORD.equals("password") && userNAME.equals("username")){
-                answer = "yes";
-            }        
-            else{
-                answer = "no";
-            }
-    
-         return answer;
-        }
-*/
-
-
-
 
         public static String logInSearch(String userNAME, String passWORD, String searchTable){
 
@@ -879,10 +807,9 @@ public class NewJFrame extends javax.swing.JFrame {
         case "Admin":
                 JOptionPane.showMessageDialog(null, "Invalid username", "Access Denied", 0);
                 return "Denied";
-          //  break;
+
             default:
             return "Denied";
-                //break;
         }
 
 
@@ -890,19 +817,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(sql);
-     //   conn.close();
 
             if(result.next()){
                 int res = result.getInt(1);
                 if(res == 1){
-               //     Class.forName("com.mysql.cj.jdbc.Driver");
-                  //  conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
 
-                //    sql = "SELECT ID FROM " + tableName + " WHERE Username = '" + userNAME  + "' AND Password = '" + passWORD + "'";
-           //  Statement stmt2 = conn.createStatement();
-         //   ResultSet result2 = stmt2.executeQuery(sql);
-             
-          //  conn.close();
                     if(tableName.equals("parentdetails")){
                         LogInForm.parentId = result.getInt("ID");
                         conn.close();
@@ -937,9 +856,7 @@ public class NewJFrame extends javax.swing.JFrame {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
-    
-                //String name = JOptionPane.showInputDialog(null, "Enter Parent Name");
-    
+
                 if (isNull(id) == true) {
                     return;
                 }
@@ -948,25 +865,17 @@ public class NewJFrame extends javax.swing.JFrame {
                     return;
                 }
     
-               // String surname = JOptionPane.showInputDialog(null, "Enter Parent Surname"); 
-    
                 if (isNull(surname) == true) {
                     return;
                 }
     
-               // String contactNum = JOptionPane.showInputDialog(null, "Enter Parent Contact Number");
-    
                 if (isNull(contactNum) == true) {
                     return;
-                }
-    
-              //  String address = JOptionPane.showInputDialog(null, "Enter Parent Address");           
+                }         
     
                 if (isNull(address) == true) {
                     return;
                 }
-    
-                //String numChildren = JOptionPane.showInputDialog(null, "Enter the Number of your Children currently in enrolled in our school");
     
                 if (isNull(numChildren) == true) {
                     return;
@@ -1008,8 +917,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schoolregistrationsystem","root","root");
     
-                //String name = JOptionPane.showInputDialog(null, "Enter Parent Name");
-    
                 if (isNull(id) == true) {
                     return;
                 }
@@ -1017,31 +924,15 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (isNull(name) == true) {
                     return;
                 }
-    
-               // String surname = JOptionPane.showInputDialog(null, "Enter Parent Surname"); 
-    
+
                 if (isNull(surname) == true) {
                     return;
                 }
-    
-               // String contactNum = JOptionPane.showInputDialog(null, "Enter Parent Contact Number");
-    
+
                 if (isNull(contactNum) == true) {
                     return;
                 }
-    
-              //  String address = JOptionPane.showInputDialog(null, "Enter Parent Address");           
-    
-             //   if (isNull(address) == true) {
-             //       return;
-             //   }
-    
-                //String numChildren = JOptionPane.showInputDialog(null, "Enter the Number of your Children currently in enrolled in our school");
-    
-             //   if (isNull(numChildren) == true) {
-            //        return;
-             //   }
-                
+              
                 if (isNull(password) == true) {
                     return;
                 }

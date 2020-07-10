@@ -95,9 +95,9 @@ public class parentInput extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnParentUpdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfParentID, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfSurname, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfName, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(tfParentID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfSurname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,10 +105,10 @@ public class parentInput extends javax.swing.JFrame {
                                     .addComponent(lblParentID))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
+                                .addGap(89, 89, 89)
                                 .addComponent(btnParentInsert))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
+                                .addGap(71, 71, 71)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(1, 1, 1)
@@ -170,8 +170,7 @@ public class parentInput extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
-                                .addComponent(lblPassword)
-                                .addGap(30, 30, 30))
+                                .addComponent(lblPassword))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -181,6 +180,9 @@ public class parentInput extends javax.swing.JFrame {
                     .addComponent(btnParentInsert))
                 .addGap(31, 31, 31))
         );
+
+        btnParentUpdate.setVisible(false);
+        btnParentInsert.setVisible(true);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
