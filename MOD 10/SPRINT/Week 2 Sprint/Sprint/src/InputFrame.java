@@ -181,28 +181,16 @@ public class InputFrame extends javax.swing.JFrame {
 
         btnLearnerUpdate.setVisible(false);
         btnLearnerInsert.setVisible(true);
-        /*
-         switch (NewJFrame.currButton) {
-            case "Insert":
-                    btnLearnerUpdate.setVisible(false);
-                    btnLearnerInsert.setVisible(true);
-                break;
-               // case "Update":
-            //    btnLearnerUpdate.setVisible(true);
-            //    btnLearnerInsert.setVisible(false);
-          //  break;
-            default:
-                break;
-        }*/
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLearnerUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLearnerUpdateActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnLearnerUpdateActionPerformed
 
     private void btnLearnerInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLearnerInsertActionPerformed
-        // TODO add your handling code here:
+       
         NewJFrame.readInLearner(tfLearnerID.getText(), tfLearnerName.getText(), tfLearnerSurname.getText(), tfLearnerDOB.getText(), tfLearnerGender.getText(), 
         tfLearnerGrade.getText(), tfLearnerParentID.getText());
     }//GEN-LAST:event_btnLearnerInsertActionPerformed

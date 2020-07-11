@@ -1,7 +1,5 @@
 package src;
 
-import javax.swing.JOptionPane;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -110,13 +108,11 @@ public class LogInForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLogInActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cmbLogInActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        // TODO add your handling code here:
         
-         //   System.out.println(NewJFrame.isAdmin("a", "b"));
        accessLevel = 
        NewJFrame.logInSearch(tfName.getText(), tfSurname.getText(), cmbLogIn.getItemAt(cmbLogIn.getSelectedIndex())); 
 

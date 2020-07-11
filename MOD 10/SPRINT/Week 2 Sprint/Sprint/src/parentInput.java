@@ -188,11 +188,11 @@ public class parentInput extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnParentUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentUpdateActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnParentUpdateActionPerformed
 
     private void btnParentInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentInsertActionPerformed
-        // TODO add your handling code here:
+        
         NewJFrame.readInParent(tfParentID.getText(), tfName.getText(), tfSurname.getText(), tfContactNo.getText(), tfAddress.getText(),
          tfNumChildren.getText(), tfPassword.getText(), tfUsername.getText());
     }//GEN-LAST:event_btnParentInsertActionPerformed

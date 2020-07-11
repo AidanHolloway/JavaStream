@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -282,6 +280,15 @@ public class NewJFrame extends javax.swing.JFrame {
                 default:
                     break;
             }
+
+            currTable = "Learner"; 
+       if(LogInForm.accessLevel.equals("Parent")){
+        parentPrint(LogInForm.parentId);
+       }
+       else{
+        printAll(currTable);
+    }
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -291,7 +298,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        // TODO add your handling code here:
+        
        currButton = "Insert";
         switch (currTable) {
            case "Learner":
@@ -320,13 +327,13 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
+        
 
         createTable(currTable);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnLearnerTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLearnerTblActionPerformed
-        // TODO add your handling code here:
+        
        currTable = "Learner"; 
        if(LogInForm.accessLevel.equals("Parent")){
         parentPrint(LogInForm.parentId);
@@ -338,13 +345,13 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLearnerTblActionPerformed
 
     private void btnParentTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentTblActionPerformed
-        // TODO add your handling code here:
+        
         currTable = "Parent";
         printAll(currTable);
     }//GEN-LAST:event_btnParentTblActionPerformed
 
     private void btnTeacherTblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherTblActionPerformed
-        // TODO add your handling code here:
+        
         currTable = "Teacher";
         printAll(currTable);
     }//GEN-LAST:event_btnTeacherTblActionPerformed
@@ -433,10 +440,28 @@ public class NewJFrame extends javax.swing.JFrame {
                 ResultSet result = stmt.executeQuery(sql);
     
                 DefaultTableModel model = null;
-    
+                
+                switch (tableType) {
+                    case "Learner":
+                    model = new DefaultTableModel(new String[]{"ID", "Learner Name", "Surname",
+                    "Date of Birth", "Gender", "Grade"}, 0);
+                        break;
+                case "Parent":
+                model = new DefaultTableModel(new String[]{"ID", "Parent Name", "Surname",
+                "Contact Number", "Address", "Number Of Children"}, 0);
+                        break;
+                case "Teacher":
+                model = new DefaultTableModel(new String[]{"ID", "Teacher Name", "Surname",
+                "Contact Number"}, 0);
+                        break;
+                
+                    default:
+                        break;
+                } 
+
                 if(result.next()){
                     int res = result.getInt(1);
-                    if(res == 1){
+                    if(res >= 0){
                         sql = "SELECT * FROM " + tableName;
                         stmt = conn.createStatement();
                         ResultSet result2 = stmt.executeQuery(sql);
@@ -492,7 +517,7 @@ public class NewJFrame extends javax.swing.JFrame {
            
                         break;
                         case "Teacher":
-                        model = new DefaultTableModel(new String[]{"ID", "Parent Name", "Surname",
+                        model = new DefaultTableModel(new String[]{"ID", "Teacher Name", "Surname",
                         "Contact Number"}, 0);
                        
                         while(result2.next()){
@@ -500,9 +525,8 @@ public class NewJFrame extends javax.swing.JFrame {
                             name = result2.getString("Name");
                             surname = result2.getString("Surname");
                             String contacts = result2.getString("ContactNo");
-                         //   String username = result2.getString("Username");
-                        //    String password = result2.getString("Password");
-                            model.addRow(new Object[]{idNo, name, surname, contacts});//, address, numChildren});
+            
+                            model.addRow(new Object[]{idNo, name, surname, contacts});
                         }
                     
                         jTable2.setModel(model);
@@ -510,7 +534,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         
                             default:
                                 break;
-                        } 
+                        }
                         
             
             
@@ -519,6 +543,7 @@ public class NewJFrame extends javax.swing.JFrame {
                        JOptionPane.showMessageDialog(null, "The record could not be found."); 
                     }
                 }
+                jTable2.setModel(model);
                     conn.close();
                
             } catch (SQLException | ClassNotFoundException ex) {
@@ -604,6 +629,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                 }
                     conn.close();
+
+                    printAll(currTable);
+
                 } catch (SQLException | ClassNotFoundException ex) {
                     JOptionPane.showMessageDialog(null, "An error has occurred.");
                     ex.printStackTrace();
@@ -762,21 +790,26 @@ public class NewJFrame extends javax.swing.JFrame {
             }
            
             if(isNull(parentID) == true){
+                JOptionPane.showMessageDialog(null, "Enter an existing parent's Parent ID");
                 return;
+
             }
 
-            PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(Names, Surname, DateOfBirth, Gender, Grade, ParentID) VALUES(?,?,?,?,?,?)");
-            stmt.setString(1, name);
-            stmt.setString(2, surname);
-            stmt.setString(3, dob);
-            stmt.setString(4, gender);
-            stmt.setString(5, grade);
-            stmt.setString(6, parentID);
+            PreparedStatement stmt=conn.prepareStatement("INSERT INTO learnerDetails(ID, Names, Surname, DateOfBirth, Gender, Grade, ParentID) VALUES(?,?,?,?,?,?,?)");
+            stmt.setString(1, id);
+            stmt.setString(2, name);
+            stmt.setString(3, surname);
+            stmt.setString(4, dob);
+            stmt.setString(5, gender);
+            stmt.setString(6, grade);
+            stmt.setString(7, parentID);
             
             int i=stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, i + " records inserted");
             conn.close();
              
+            printAll(currTable);
+
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "An error has occurred");
             ex.printStackTrace();
@@ -906,6 +939,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, i + " records inserted");
                 conn.close();
                  
+                printAll(currTable);
+
             } catch (SQLException | ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "An error has occurred");
                 ex.printStackTrace();
@@ -956,6 +991,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, i + " records inserted");
                 conn.close();
                  
+                printAll(currTable);
+
             } catch (SQLException | ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "An error has occurred");
                 ex.printStackTrace();
@@ -1003,22 +1040,5 @@ public class NewJFrame extends javax.swing.JFrame {
     
         }
 
-        /*public static void createTable(String tableType) {
-            
-            String tableName = "";
-        switch (tableType) {
-            case "Learner":
-                tableName = "learnerDetails";
-                break;
-        case "Parent":
-                tableName = "parentDetails";
-                break;
-        case "Teacher":
-                tableName = "teacherDetails";
-                break;
         
-            default:
-                break;
-        } 
-    }*/
 }
