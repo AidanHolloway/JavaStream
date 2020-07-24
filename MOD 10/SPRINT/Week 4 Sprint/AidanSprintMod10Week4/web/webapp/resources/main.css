@@ -1,0 +1,576 @@
+
+/*header*/
+.navBar { 
+    width: 80px; 
+    height: fit-content;/*25px;*/
+    color: #000000; 
+    font-family: 'Source Sans Pro'; 
+    font-size: 20px; 
+    text-decoration: none; 
+    text-align: center; 
+    padding: 20; 
+    border: 1px solid #000000; 
+    border-radius: 30px; 
+    background-color: rgb(143, 134, 4);
+    }  
+    .navBarItemSelected { 
+    background: #e0e0e0; 
+    color: #000000; 
+    }
+    .navBar:hover { 
+    background: #e0e0e0; 
+    color: #000000; 
+    } 
+     
+    .navLink:link {
+        text-decoration: none; 
+        padding: 10px;
+    }
+
+    .navLink:visited {
+        text-decoration: none;
+    }
+    .navLink:hover {
+        text-decoration: none;
+    }
+    .navLink:active {
+        text-decoration: none;
+    }
+ 
+    body {
+        display: flex; 
+        flex-direction: column; 
+        align-content: space-between;
+    }
+    
+    #header {
+        display: flex;
+        align-items: center;
+        flex-flow: row wrap;
+        border-bottom: 2px solid rgb(240, 219, 102);
+        border-top: 1px solid #C5C1C0;
+        border-left: 0.6px solid #C5C1C0;
+        border-right: 0.6px solid #C5C1C0;
+        width: 100%;
+        background-color: rgb(55, 59, 65);
+    }
+    #footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row nowrap;
+        border-bottom: 1px solid #C5C1C0;
+        border-left: 1px solid #C5C1C0;
+        border-right: 1px solid #C5C1C0;
+        width: 100%;
+        background-color: #C5C1C0;
+        padding: 0px 0px 0px 0px;
+        margin-top: 0px;
+    }
+    #navHolder {
+        order: 3;
+        display: flex;
+        flex-flow: row nowrap;
+   }
+    
+    #heading {
+        order: 2;
+    }
+
+    #schoolLogo {
+        order: 1;
+    }
+    #schoolLogo img {
+        width: 107px;
+        height : 123px;
+    }
+   /*Social Media LinkBar*/
+   .links {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        width: 100%;
+        height: 30px;
+        border: 0px solid black;
+        background-color: rgb(55, 59, 65);
+       padding: 4px 0px 2px 0px;
+        
+    }
+    .linksHomepage {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        width: 100%;
+        height: 30px;
+        border: 1px solid rgb(55, 59, 65);
+        background-color: rgb(55, 59, 65);
+        padding: 4px 0px 2px 0px;
+        margin-bottom: 0px;
+    }
+
+    .socialShower {
+        margin-right: 10px;
+        color: white;
+        font-weight: bold;
+    } 
+
+    .socialLink {
+        margin: 0px 1px;
+    }
+
+    .socialLink:link {
+        text-decoration: none;
+        color: black;
+        background-color: rgb(55, 59, 65);
+    }
+    .socialLink:visited {
+        text-decoration: none;
+        color: black;
+        background-color: rgb(55, 59, 65);
+    }
+
+    .socialLink:hover { 
+        color: white;
+        background-color: rgb(55, 59, 65);
+    }
+    .socialLink:active {
+        color: white;
+        background-color: rgb(55, 59, 65);
+    }        
+   
+    /*Middel*/
+
+    /*Homepage*/
+    .schoolName {
+        display:block; 
+        line-height: 100%; 
+        width: 447px; 
+        height: 40px; 
+        top: 71px; 
+        left: 215px; 
+        padding: 5px; 
+        font-size: 32px;
+        color: white;
+    }
+    .homepage {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        background-image: url("Images/HomepageImages/DesktopView/homepageSchoolCourtyardDesktopView2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-size: 100% 100%;
+        flex-wrap: nowrap;
+        height: 550px;
+        }
+    .mission {
+        width: 50%;
+        border: 1px solid black;
+        flex-wrap: wrap;
+        font-size: 20px;
+        /*background-color: #B1A296;*/
+        background-color: rgb(55, 59, 65);
+        color: rgb(143, 134, 4);
+        height: fit-content;
+        margin-left: 1%;
+        text-align: center;
+
+        position: relative;
+        top: 15%;
+        left: 25%;
+    }
+    .homeImages {
+        display: flex;
+        flex-flow: row nowrap;
+        align-content: space-between;
+        margin-top: 200px;
+        width: fit-content;
+    }
+    .homeImages img {
+        width: 20%;
+        height: 200px;
+        margin: auto;
+    }
+    /*About Us Page*/
+    #aboutUsFrame {
+        height: 550px;
+        width: 100%;
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+        background-color: #B1A296;
+    }
+
+    /*.principalImage {
+        margin-left: 45%;
+        width: 100px; height: 200px;
+    }*/
+    .gradeImage {
+        width: 100px; height: 200px;
+    }
+    .gradeImageHolder {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+    }
+
+    .aboutInfo {
+        clear: none;
+        order: 1;
+    }
+    div.aboutUs {
+        word-wrap: normal;
+        display: flex;  
+        flex-direction: row;   
+        flex-wrap: nowrap;   
+    }
+    div.aboutUs img {
+        order: 2;
+    }
+    .aboutUsMobileImg {
+        display: none;
+    }
+    div.answer{
+        border: 1px solid black;
+        background-color: rgb(170, 170, 149);
+        display: none;
+        width: 100%;
+      }
+    div.answer p {
+        margin-left: 10px;
+    }
+    div.question {
+        cursor: pointer;
+        border: 1px solid black;
+    }
+    div.question p {
+        margin-left: 10px;
+    }
+    div.faqCol {
+        background-color: #f5f5dc54;
+        border: 1px solid black;
+    }
+
+    /*a.primaryAc button:hover {
+        background-color: black;
+    }
+    a.primaryAC button:visited {
+        background-color: black;
+    }*/
+
+    /*Events Page*/
+    #eventFrame {
+        height: 450px;
+        width: 900px;
+        background-color: #C5CBE3;
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
+        align-self: center;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    #eventContainer {
+        display: flex; 
+        flex-flow: column nowrap;
+    }
+    #eventDivisions {
+        display: flex; 
+        flex-flow: row nowrap; 
+        margin: auto;
+        /*margin-bottom: 20px;*/
+        border: 1px solid black;
+        padding: 10px;
+        background-color: darkgrey;
+    }
+    #eventBar {
+        width: 900px; 
+        height: fit-content; 
+        background-color: grey; 
+        align-self: center;
+    }
+    #eventList {
+        display: flex; 
+        flex-flow: row nowrap;
+    }
+    #primaryEvents {
+        display: none; 
+        flex-flow: row nowrap; 
+        margin-top: 2.5px; 
+        margin: auto;
+        border: 1px solid black;
+        padding: 18px;
+        background-color: darkgray;
+    }
+    #highEvents {
+        display: flex; 
+        flex-flow: row nowrap; 
+        margin-top: 2.5px; 
+        margin: auto;
+        border: 1px solid black;
+        padding: 18px;
+        background-color: darkgray;
+    }
+    .eventChoice {
+        /*filter: brightness(1);*/
+        filter:grayscale(0.7);
+        /*filter: saturate(1);*/
+    }
+    .eventChoice:hover {
+        /*filter: brightness(3);*/
+        filter: saturate(3);
+    }
+    .eventImage {
+        display: flex;
+        order: 2;
+        width: 40%;
+        height: 200px;
+        margin: auto;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    .eventImage img {
+        width: 100%;
+        height: 200px;
+    }
+    div.eventImage picture source { 
+       width : 40%;
+        height: 200px;
+    }
+    .eventEvent {
+        order: 1;
+        width: 40%;
+        height: fit-content;
+        margin: 1%;
+        font-size: 16px;
+        background-color: #B1A296; 
+        padding: 10px;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .eventDetails {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1%;
+        width: 98%;
+        border: 1px solid black;
+        background-color: #5D5C61;
+    }
+    .imgAbout { 
+        order: 2;
+    }
+    @media only screen and (max-width: 551px) {
+    
+        #eventFrame {
+            height: 350px;
+        }
+
+        #eventDivisions {
+            padding: 0px;
+        }
+        
+        #primaryEvents {
+            padding: 0px;
+        }
+        #highEvents {
+            padding: 0px;
+        }
+        #eventList {
+            height: fit-content;
+            padding: 0px;
+        }
+
+        /*Homepage*/
+        .mission {
+            top: 20%;
+        }
+ 
+         .homeImages {
+             top: 150px;
+             height: 50px;
+         }
+ 
+         .homeImages img {
+             height: 50px;
+         }
+     }
+
+    @media only screen and (max-width: 650px) {
+        /*Header*/
+        .schoolName {
+            font-size: 20px;
+            text-align: center;
+            height: 30px;
+        }
+
+        
+        /*Homepage*/
+        .homepage {
+            height: 504px;
+            background-image: url("Images/HomepageImages/MobileView/homepageSchoolCourtyardMobileView3.jpg");
+            border-right: 1px solid black;
+            border-left: 1px solid black;
+        }
+        .homeImages img {
+            height: 75px;
+        }
+
+        .mission {
+            margin-top: -5%;
+        }
+        /*About Us Page*/
+        .aboutUs {
+            flex-wrap: nowrap;
+            flex-direction: column;
+        }
+        .aboutInfo {
+            clear: both;
+            order: 1;
+        }
+        .aboutUs img {
+            order: 2;
+            justify-content: flex-end;
+            display: none;
+        }
+        .aboutUsMobileImg {
+            display: block;
+            height: 300px;
+            width: 100%;
+        }
+        div.question {
+            font-size: smaller;
+        }
+
+        div.answer {
+            font-size: smaller;
+        }
+        /*Events Page*/
+        .eventImage {
+            height: 200px;
+            width: 40%;
+        }
+        .eventImage img {
+            height: 200px;
+            width: 100%;
+        }
+    }
+
+     @media only screen and (max-width: 1000px) {
+        #header {flex-flow: column nowrap;}
+        #schoolLogo {order: 1;}
+        #schoolLogo img {
+            width: 70px;
+            height: 100px;
+        }
+        #heading {order: 2;}
+        #navHolder {order: 3;}
+        #eventFrame {height: 504px;}
+        #aboutUsFrame {height: 504px;}
+        
+        /*Homepage*/
+        .homepage {
+            height: 504px;
+            display: block;
+        }
+        .mission {
+            font-size: 13px;
+            flex-wrap: wrap;
+            position: relative;
+            width: 50%;
+            top: 10%;
+            height: fit-content; 
+        }
+        
+        .homeImages img {
+            height: 100px;
+        }
+
+
+        /*About Us page*/
+        div.aboutUs{
+            font-size: 13px;        
+        }
+
+        /*Events page*/
+        .eventEvent {
+            font-size: 13px;
+            width: 400px;
+            flex-wrap: wrap;
+            height: fit-content;
+        }    
+        .homepageImg1 {
+            width: 50px;
+            height: 50px;}
+
+        /*#eventContainer {
+            flex-flow: column nowrap;
+            width: 98%;
+        }
+
+        #eventDivisions {
+            flex-flow: column nowrap;
+        }*/
+
+        /*#eventBar {
+            width: fit-content;
+            align-self: flex-start;
+        }
+
+        /*#eventList {
+            flex-flow: column nowrap;
+        }*/
+
+        #primaryEvents {
+            flex-flow: row nowrap;
+            padding: 18px;
+            background-color: darkgray;
+        }
+
+        #highEvents {
+            flex-flow: row nowrap;
+            padding: 18px;
+            background-color: darkgray;
+        }
+
+        #eventFrame {
+            width: 90%;
+        } 
+
+        #eventBar {
+            width: 90%;
+        }
+        
+   }
+
+   @media only screen and (max-width: 630px) {
+       #eventContainer {flex-flow: column nowrap;}
+       #eventDivisions {flex-flow: row nowrap; padding: 2px 1px;}
+       #primaryEvents {flex-flow: row nowrap; padding: 2px 9px;background-color: darkgray;}
+       #highEvents {flex-flow: row nowrap; padding: 2px 9px;background-color: darkgray;}
+       #eventBar {align-self: center;}
+       
+       .eventEvent {width: 90%;}
+
+       .eventImage {width: 160px;}
+   }
+
+   /*@media only screen and (max-width: 800px) {
+    #principalImage {margin-left: 40%;}
+}*/
+
+@media only screen and (max-width: 480px) {
+    .gradeImageHolder {justify-content: flex-start; flex-flow: row wrap;}
+}
+
+  /* @media only screen and (max-width: 410px) {
+       #principalImage {margin-left: 35%;}
+   }*/
