@@ -1,0 +1,16 @@
+[main] DEBUG Mod103_Week2_Day4_Act3  - Hello this is a debug message
+  [main] INFO  Mod103_Week2_Day4_Act3  - Hello this is an info message
+  [main] DEBUG Mod103_Week2_Day4_Act3  - Hello this is a debug message
+  [main] INFO  Mod103_Week2_Day4_Act3  - Hello this is an info message
+  [main] DEBUG Mod103_Week2_Day4_Act3  - Hello this is a debug message
+  [main] INFO  Mod103_Week2_Day4_Act3  - Hello this is an info message
+  [main] DEBUG Mod103_Week2_Day4_Act3  - Hello this is a debug message
+  [main] INFO  Mod103_Week2_Day4_Act3  - Hello this is an info message
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  [main] ERROR Mod103_Week2_Day4_Act3  - java.lang.ArithmeticException: / by zero
+  
